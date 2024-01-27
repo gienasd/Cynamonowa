@@ -1,36 +1,37 @@
 package entities;
 
 public class Item {
-
     private String name;
     private double cost;
     private String shop;
     private int count;
-    private KindOfItem kindOfItem;
     private Room room;
+    private KindOfItem kindOfItem;
 
-    public Item() {
-    }
 
-    public Item(String name, double cost, String shop, int count, KindOfItem kindOfItem, Room room) {
+    public Item(String name, String shop, int cost, int count, KindOfItem kindOfItem, Room room) {
         this.name = name;
-        this.cost = cost;
         this.shop = shop;
         this.count = count;
+        this.cost = cost;
         this.kindOfItem = kindOfItem;
         this.room = room;
     }
 
+    public Item() {
+    }
+
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+
     public double getCost() {
-        return cost;
+        return this.cost;
     }
 
     public void setCost(double cost) {
@@ -38,7 +39,7 @@ public class Item {
     }
 
     public String getShop() {
-        return shop;
+        return this.shop;
     }
 
     public void setShop(String shop) {
@@ -46,7 +47,7 @@ public class Item {
     }
 
     public int getCount() {
-        return count;
+        return this.count;
     }
 
     public void setCount(int count) {
@@ -61,6 +62,7 @@ public class Item {
         this.kindOfItem = kindOfItem;
     }
 
+
     public Room getRoom() {
         return room;
     }
@@ -71,13 +73,11 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "Nazwa='" + name + '\'' +
-                ", koszt=" + cost +
-                ", sklep='" + shop + '\'' +
-                ", ilość=" + count +
-                ", rodzaj=" + kindOfItem +
-                ", pokój=" + (room != null ? room : "Brak") +
-                '}';
+        return name + '\'' +
+                ", cost=" + cost +
+                ", shop='" + shop + '\'' +
+                "," + count + "pc." + '\'' +
+                ", what is this=" + kindOfItem +
+                ", where you will place it=" + (room != null ? room : "Brak");
     }
 }

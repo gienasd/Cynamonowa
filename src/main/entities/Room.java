@@ -3,8 +3,9 @@ package entities;
 public enum Room {
     KITCHEN,
     BATHROOM,
-    ANOTHER_BATHROOM,
-    DAMIANS_BASEMENT,
-    LIVING_ROOM,
-    SLEEPING_ROOM
+    DAMIANS_CAVE,
+    WC,
+    BEDROOM,
+    BEDROOM2,
+    LIVINGROOM
 }
