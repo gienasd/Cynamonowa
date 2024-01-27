@@ -10,13 +10,6 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<Item> shopList = setupItems();
 
-        // all items from Ikea
-        List<Item> filteredbyIkeaList = shopList.stream()
-                .filter(item -> item.getShop().equalsIgnoreCase("Ikea"))
-                .toList();
-        System.out.println("Items which you will buy in Ikea: "
-                + filteredbyIkeaList);
-
         // all items in kitchen
         List<Item> filteredbyKitchenList = shopList.stream()
                 .filter(item -> Room.KITCHEN.equals(item.getRoom()))
@@ -33,7 +26,7 @@ public class Main {
 
         //Cost in Ikea
         double ikeaCost = shopList.stream()
-                .filter(item -> item.getShop().contains("Ikea"))
+                .filter(item -> item.getShop().equalsIgnoreCase("Ikea"))
                 .mapToDouble(Item::getCost)
                 .sum();
         System.out.println("In Ikea you will spend: "
@@ -41,8 +34,8 @@ public class Main {
 
         // tools from Castorama
         List<Item> filteredbyCastoramaList = shopList.stream()
-                .filter(item -> item.getShop().contains("Castorama"))
-                .filter(item -> item.getKindOfItem().equals(KindOfItem.TOOL))
+                .filter(item -> item.getShop().equalsIgnoreCase("Castorama"))
+                .filter(item -> KindOfItem.TOOL.equals(item.getKindOfItem()))
                 .toList();
         System.out.println("Tools which you will buy in Castorama: "
                 + filteredbyCastoramaList);
@@ -57,7 +50,6 @@ public class Main {
         // else items with we will buy
         HashSet<Item> allUsedItems = new HashSet<>();
         allUsedItems.addAll(filteredby1000PLNList);
-        allUsedItems.addAll(filteredbyIkeaList);
         allUsedItems.addAll(filteredbyCountMoreThanOneList);
         allUsedItems.addAll(filteredbyCastoramaList);
         allUsedItems.addAll(filteredbyKitchenList);
