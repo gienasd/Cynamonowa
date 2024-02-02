@@ -22,11 +22,11 @@ public class ItemController {
 
         //Cost in Ikea
         System.out.println("In Ikea you will spend: "
-                + itemService.getCostOfItemsFromGivenShop("Ikea"));
+                + itemService.getCostOfItemsFromShop("Ikea"));
 
         // tools from Castorama
         System.out.println("Tools which you will buy in Castorama: "
-                + itemService.getItemsFromGivenShopWithGivenKind("Castorama", KindOfItem.TOOL));
+                + itemService.getItemsFromShopWithKind("Castorama", KindOfItem.TOOL));
 
         // more than one piece of item
         System.out.println("Items which you will buy more than one piece: "

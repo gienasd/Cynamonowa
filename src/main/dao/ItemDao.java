@@ -8,7 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDao {
+    private final List<Item> itemList = new ArrayList<>(setupItemList());
+
     public List<Item> getShopList() {
+        return itemList;
+    }
+
+    public void addItemToList(final Item item) {
+        checkIfItemAlreadyExists();
+        itemList.add(item);
+    }
+
+    //TODO: Dopisz metody, które updatują item, usuwają item, usuwają wiele itemów, (w przypadkach usuwania może warto sprawdzić jego 'count'? może usuwamy 3 sztuki, a w liście jest 5?)
+    // dodają wiele itemów (w ostatnim przypadku ze sprawdzaniem checkIfItemAlreadyExists, jak w przypadku dodawania pojedynczego itemu)
+
+    private void checkIfItemAlreadyExists() {
+        //TODO: Dopisać metodę, w której sprawdzisz, czy dany Item jest już w ShopLiście, a jeżeli jest to zwiększysz mu 'count' o 'count' itemu, który sprawdzamy
+        // a jeśli nie ma to zrób 'break;'
+    }
+
+    private List<Item> setupItemList() {
         Item induction = new Item("induction_Bosh", "media_markt", 1299, 1, KindOfItem.OTHER, Room.KITCHEN);
         Item table = new Item("dinner_table", "Ikea", 799, 1, KindOfItem.FURNITURE, Room.LIVINGROOM);
         Item oven = new Item("Oven_Bosh", "media_markt", 1399, 1, KindOfItem.OTHER, Room.KITCHEN);
