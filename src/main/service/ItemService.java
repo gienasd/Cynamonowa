@@ -5,64 +5,44 @@ import entities.Item;
 import entities.KindOfItem;
 import entities.Room;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class ItemService {
     private final ItemDao itemDao = new ItemDao();
 
-    public List<Item> filterByIkeaList() {
+    public List<Item> getItemsByShopName(String shopName) {
         return itemDao.getShopList().stream()
-                .filter(item -> item.getShop().equalsIgnoreCase("Ikea"))
+                .filter(item -> item.getShop().equalsIgnoreCase(shopName))
                 .toList();
     }
 
-    public List<Item> filterByKitchenList() {
+    public List<Item> getItemsByRoom(Room room) {
         return itemDao.getShopList().stream()
-                .filter(item -> Room.KITCHEN.equals(item.getRoom()))
+                .filter(item -> room.equals(item.getRoom()))
                 .toList();
     }
 
-    public List<Item> filterByPriceMoreThan(double price) {
+    public List<Item> getItemsByPriceMoreThan(double price) {
         return itemDao.getShopList().stream()
                 .filter(item -> item.getCost() > price)
                 .toList();
     }
 
-    public double getCostOfItemsFromIkea() {
-        return itemDao.getShopList().stream()
-                .filter(item -> item.getShop().equalsIgnoreCase("Ikea"))
+    public double getCostOfItemsFromGivenShop(String shopName) {
+        return getItemsByShopName(shopName).stream()
                 .mapToDouble(Item::getCost)
                 .sum();
     }
 
-    public List<Item> filterByCastoramaList() {
-        return itemDao.getShopList().stream()
-                .filter(item -> item.getShop().equalsIgnoreCase("Castorama"))
-                .filter(item -> KindOfItem.TOOL.equals(item.getKindOfItem()))
+    public List<Item> getItemsFromGivenShopWithGivenKind(String shopName, KindOfItem kindOfItem) {
+        return getItemsByShopName(shopName).stream()
+                .filter(item -> kindOfItem.equals(item.getKindOfItem()))
                 .toList();
     }
 
-    public List<Item> filterByCountMoreThanOneList() {
+    public List<Item> getItemsWithCountMoreThan(int count) {
         return itemDao.getShopList().stream()
-                .filter(item -> item.getCount() > 1)
+                .filter(item -> item.getCount() > count)
                 .toList();
-    }
-
-    public List<Item> getRestList() {
-        List<Item> restList = new ArrayList<>(itemDao.getShopList());
-        restList.removeAll(getAllFilteredItems());
-        return restList;
-
-    }
-
-    private HashSet<Item> getAllFilteredItems() {
-        HashSet<Item> allUsedItems = new HashSet<>();
-        allUsedItems.addAll(filterByIkeaList());
-        allUsedItems.addAll(filterByCountMoreThanOneList());
-        allUsedItems.addAll(filterByCastoramaList());
-        allUsedItems.addAll(filterByKitchenList());
-        return allUsedItems;
     }
 }
